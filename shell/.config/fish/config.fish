@@ -71,4 +71,7 @@ function d
 	end
 end
 
+function fish_greeting
+end
+
 setenv NVM_DIR "$HOME/.nvm"
