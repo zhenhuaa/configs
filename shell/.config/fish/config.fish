@@ -50,3 +50,14 @@ end
 
 set BREW_PATH = "/usr/local/bin"
 set PATH "$PATH:$BREW_PATH"
+
+
+# Type - to move up to top parent dir which is a repository
+function d
+	while test $PWD != "/"
+		if test -d .git
+			break
+		end
+		cd ..
+	end
+end
