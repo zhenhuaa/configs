@@ -1,3 +1,12 @@
+# alias
+alias e nvim
+alias vim nvim 
+alias ls exa
+alias ll "exa -l"
+
+alias gd "git diff"
+
+
 # Fish git prompt
 set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showdirtystate 'yes'
@@ -61,3 +70,5 @@ function d
 		cd ..
 	end
 end
+
+setenv NVM_DIR "$HOME/.nvm"
