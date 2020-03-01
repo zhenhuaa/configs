@@ -1,10 +1,22 @@
 # alias
-alias e nvim
-alias vim nvim 
-alias ls exa
-alias ll "exa -l"
+abbr -a e nvim
 
-alias gd "git diff"
+abbr -a g git
+abbr -a gc 'git checkout'
+abbr -a ga 'git add -p'
+
+if command -v exa > /dev/null
+	abbr -a ls 'exa'
+	abbr -a ll 'exa -l'
+	abbr -a lll 'exa -la'
+else
+	abbr -a ll 'ls -l'
+	abbr -a lll 'ls -la'
+end
+
+if test -f /usr/local/share/autojump/autojump.fish;
+	source /usr/local/share/autojump/autojump.fish;
+end
 
 
 # Fish git prompt
@@ -57,9 +69,7 @@ function fish_prompt
 	set_color normal
 end
 
-set BREW_PATH = "/usr/local/bin"
-set PATH "$PATH:$BREW_PATH"
-
+set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin
 
 # Type - to move up to top parent dir which is a repository
 function d
