@@ -3,7 +3,9 @@ abbr -a e nvim
 
 abbr -a g git
 abbr -a gc 'git checkout'
-abbr -a ga 'git add -p'
+abbr -a gaa 'git add .'
+abbr -a gst 'git status'
+abbr -a gd 'git diff'
 
 if command -v exa > /dev/null
 	abbr -a ls 'exa'
