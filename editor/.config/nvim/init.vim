@@ -15,16 +15,16 @@ filetype off
 call plug#begin()
 
 Plug 'mhinz/vim-startify'
-Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-
+Plug 'airblade/vim-rooter'
 Plug 'liuchengxu/space-vim-theme'
 Plug 'liuchengxu/eleline.vim'
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -60,6 +60,9 @@ nmap <leader>rn <Plug>(coc-rename)
 
 nmap <leader>ff :Files<Enter>
 nmap <leader>fb :Buffers<Enter>
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -257,6 +260,8 @@ map <C-p> :Files<CR>
 inoremap <C-j> <Esc>
 
 
+set clipboard=unnamedplus
+
 " search tools
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
@@ -266,3 +271,4 @@ if executable('rg')
 	set grepprg=rg\ --no-heading\ --vimgrep
 	set grepformat=%f:%l:%c:%m
 endif
+
