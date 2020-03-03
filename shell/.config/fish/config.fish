@@ -2,6 +2,8 @@
 abbr -a e nvim
 abbr -a g git
 abbr -a gco 'git checkout'
+abbr -a gco 'git checkout'
+abbr -a gcm 'git commit -m'
 abbr -a ga 'git add'
 abbr -a gst 'git status'
 abbr -a gd 'git diff'
