@@ -1,10 +1,12 @@
 # alias
 abbr -a e nvim
 abbr -a g git
-abbr -a gc 'git checkout'
-abbr -a gaa 'git add .'
+abbr -a gco 'git checkout'
+abbr -a ga 'git add'
 abbr -a gst 'git status'
 abbr -a gd 'git diff'
+abbr -a gdh 'git diff HEAD'
+alias glog "git  log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
 if command -v exa > /dev/null
 	abbr -a ls 'exa'
