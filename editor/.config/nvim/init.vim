@@ -218,7 +218,7 @@ set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4
-set tabstop=4
+set tabstop=2
 
 " Linebreak on 500 characters
 set lbr
@@ -260,8 +260,6 @@ map <C-p> :Files<CR>
 inoremap <C-j> <Esc>
 
 
-set clipboard=unnamedplus
-
 " search tools
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
@@ -271,4 +269,3 @@ if executable('rg')
 	set grepprg=rg\ --no-heading\ --vimgrep
 	set grepformat=%f:%l:%c:%m
 endif
-
