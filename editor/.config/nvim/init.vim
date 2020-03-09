@@ -183,8 +183,8 @@ syntax enable
 set t_Co=256
 
 colorscheme space_vim_theme
-
 set background=dark
+hi Normal ctermbg=NONE guibg=NONE
 
 " Set extra options when running in GUI mode
 if has("gui_running")
