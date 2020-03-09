@@ -533,11 +533,15 @@ key_bindings:
   #- { key: K,        mods: Command, chars: "\x0c"                        }
   - { key: V,        mods: Command, action: Paste                        }
   - { key: C,        mods: Command, action: Copy                         }
-  #- { key: H,        mods: Command, action: Hide                         }
+  # - { key: H,        mods: Command, action: Hide                         }
   #- { key: M,      mods: Command,         action: Minimize         }
   #- { key: Q,        mods: Command, action: Quit                         }
   #- { key: W,        mods: Command, action: Quit                         }
   - { key: F,      mods: Command|Control, action: ToggleFullscreen }
+  - { key: F,     mods: Alt,     chars: "\x1bf"                           }
+  - { key: B,     mods: Alt,     chars: "\x1bb"                           }
+  - { key: D,     mods: Alt,     chars: "\x1bd"                           }
+  - { key: H,     mods: Alt,     chars: "\x1bh"                           }
 
   #- { key: Paste,                    action: Paste                            }
   #- { key: Copy,                     action: Copy                             }
