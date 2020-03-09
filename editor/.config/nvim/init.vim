@@ -23,6 +23,7 @@ Plug 'liuchengxu/eleline.vim'
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
+Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
@@ -54,6 +55,8 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -216,8 +219,8 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 4 spaces
-set shiftwidth=4
+" 1 tab == 2 spaces
+set shiftwidth=2
 set tabstop=2
 
 " Linebreak on 500 characters
@@ -256,7 +259,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
-map <C-p> :Files<CR>
+nmap <C-p> :Files<CR>
 inoremap <C-j> <Esc>
 
 

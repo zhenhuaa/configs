@@ -62,3 +62,5 @@ function fish_greeting
 end
 
 setenv NVM_DIR "$HOME/.nvm"
+
+setenv LC_ALL "en_US.UTF-8"
