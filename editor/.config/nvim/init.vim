@@ -18,8 +18,9 @@ Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
-Plug 'liuchengxu/space-vim-theme'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
@@ -79,7 +80,7 @@ omap af <Plug>(coc-funcobj-a)
 
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified'] 
@@ -223,7 +224,8 @@ syntax enable
 " Enable 256 colors palette in Gnome Terminal
 set t_Co=256
 
-colorscheme space_vim_theme
+" colorscheme space_vim_theme
+colorscheme gruvbox
 set background=dark
 hi Normal ctermbg=NONE guibg=NONE
 
