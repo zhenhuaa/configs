@@ -1,3 +1,9 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown"]
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "Markdown"
+  ],
+  "cSpell.userWords": [
+    "roleid"
+  ]
 }

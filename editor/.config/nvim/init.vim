@@ -13,7 +13,7 @@ let mapleader = "\<Space>"
 set nocompatible
 filetype off
 call plug#begin()
-
+Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
