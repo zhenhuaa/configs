@@ -6,10 +6,14 @@ abbr -a gco 'git checkout'
 abbr -a gcm 'git commit -m'
 abbr -a ga 'git add'
 abbr -a gst 'git status'
+abbr -a gs 'git status'
 abbr -a gd 'git diff'
+abbr -a gp 'git push'
 abbr -a gdh 'git diff HEAD'
 abbr -a nvm fnm
 alias glog "git  log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias tb="nc termbin.com 9999"
+abbr -a gig "git rm -r --cached . && git add ."
 
 
 if command -v exa > /dev/null
@@ -48,7 +52,7 @@ function fish_user_key_bindings
 	end
 end
 
-set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin ~/.local/bin
+set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin ~/.local/bin ~/go/bin
 
 # Type - to move up to top parent dir which is a repository
 function d

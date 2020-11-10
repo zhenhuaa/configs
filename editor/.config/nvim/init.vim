@@ -1,10 +1,13 @@
 " Fish doesn't play all that well with others
 set shell=/bin/bash
 let g:python3_host_prog='/usr/bin/python3'
+let g:coc_node_path='/Users/zhenhua/.fnm/node-versions/v12.18.4/installation/bin/node'
+
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = "\<Space>"
+
 
 " =============================================================================
 " # PLUGINS
@@ -13,24 +16,30 @@ let mapleader = "\<Space>"
 set nocompatible
 filetype off
 call plug#begin()
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'APZelos/blamer.nvim'
+Plug 'posva/vim-vue'
 Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-sleuth'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
-Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
-Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-commentary'
+Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-fugitive'
-Plug 'vimwiki/vimwiki'
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'editorconfig/editorconfig-vim'
-
+Plug 'fatih/vim-go'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'alunny/pegjs-vim'
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -42,6 +51,13 @@ call plug#end()
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [e <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
+
+" hunk jumping
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
+
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -65,9 +81,6 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-nmap <leader>ff :Files<Enter>
-nmap <leader>fb :Buffers<Enter>
-
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -79,17 +92,23 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 
+
+let g:table_mode_corner='|'
+
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified'] 
+      \             [ 'gitbranch', 'readonly', 'absolutepath', 'modified'] 
       \           ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \ },
       \}
+
+" Enables blamer on (neo)vim startup.
+let g:blamer_enabled = 1
 
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -102,9 +121,6 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 
-
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -138,9 +154,6 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
-set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
@@ -224,10 +237,6 @@ syntax enable
 " Enable 256 colors palette in Gnome Terminal
 set t_Co=256
 
-" colorscheme space_vim_theme
-colorscheme gruvbox
-set background=dark
-hi Normal ctermbg=NONE guibg=NONE
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -238,6 +247,8 @@ if has("gui_running")
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
+
+lang zh_CN.UTF-8
 set encoding=utf8
 
 " Use Unix as the standard file type
@@ -292,6 +303,8 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+map <silent> <C-W>\ <C-W>v
+map <silent> <C-W>- <C-W>s
 
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -303,9 +316,13 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 nmap <C-p> :Files<CR>
-inoremap <C-j> <Esc>
-noremap <Leader>y "*y
+nmap <C-b> :Buffers<CR>
+map <leader>q :wq<cr>
 
+
+inoremap <C-j> <Esc>
+
+set clipboard=unnamed
 
 " search tools
 if executable('ag')
@@ -316,3 +333,31 @@ if executable('rg')
 	set grepprg=rg\ --no-heading\ --vimgrep
 	set grepformat=%f:%l:%c:%m
 endif
+
+" hide netrw_banner
+let g:netrw_banner=0
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
+autocmd FileType netrw set nolist
+
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.vim/undo
+
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
+
+nmap j gj
+nmap k gk
+
+
+colorscheme gruvbox 
+set background=dark
+hi Normal ctermbg=NONE guibg=NONE
+
+
+" language config
+" disable vim-go :GoDef short cut (gd) this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0

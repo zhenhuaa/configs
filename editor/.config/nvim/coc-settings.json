@@ -1,9 +1,30 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "Markdown"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown"],
   "cSpell.userWords": [
-    "roleid"
-  ]
+    "Commonontoller",
+    "Liang",
+    "Renqi",
+    "addevent",
+    "clazz",
+    "createtime",
+    "dugu",
+    "fullname",
+    "geteventsgetevents",
+    "rawcontent",
+    "roleid",
+    "serverid",
+    "skey",
+    "targetid"
+  ],
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  },
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json": "**swagger.yaml"
+  },
+  "yaml.trace.server": "verbose"
 }
