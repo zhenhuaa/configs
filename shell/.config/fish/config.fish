@@ -14,6 +14,7 @@ abbr -a nvm fnm
 alias glog "git  log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias tb="nc termbin.com 9999"
 abbr -a gig "git rm -r --cached . && git add ."
+alias nenpm='cnpm --registry=http://rnpm.hz.netease.com/ --registryweb=http://npm.hz.netease.com/ --cache=$HOME/.nenpm/.cache --userconfig=$HOME/.nenpmrc'
 
 
 if command -v exa > /dev/null
@@ -52,7 +53,7 @@ function fish_user_key_bindings
 	end
 end
 
-set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin ~/.local/bin ~/go/bin
+set -U fish_user_paths /usr/local/sbin /usr/local/bin /usr/bin /bin ~/.local/bin ~/go/bin ~/.poetry/bin
 
 # Type - to move up to top parent dir which is a repository
 function d
@@ -71,3 +72,4 @@ end
 setenv LC_ALL "en_US.UTF-8"
 
 fnm env --multi | source
+set -g fish_user_paths "/usr/local/opt/mysql-client/bin" $fish_user_paths

@@ -9,6 +9,8 @@
     "createtime",
     "dugu",
     "fullname",
+    "geoadd",
+    "georadius",
     "geteventsgetevents",
     "rawcontent",
     "roleid",
@@ -26,5 +28,8 @@
   "yaml.schemas": {
     "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json": "**swagger.yaml"
   },
-  "yaml.trace.server": "verbose"
+  "yaml.trace.server": "verbose",
+  "explorer.keyMappings.global": {
+    "v":"open:vsplit"
+  }
 }
