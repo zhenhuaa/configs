@@ -1,7 +1,6 @@
 " Fish doesn't play all that well with others
 set shell=/bin/bash
 let g:python3_host_prog='/usr/bin/python3'
-let g:coc_node_path='/Users/zhenhua/.fnm/node-versions/v12.18.4/installation/bin/node'
 
 
 " With a map leader it's possible to do extra key combinations
@@ -254,8 +253,6 @@ if has("gui_running")
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
-
-lang zh_CN.UTF-8
 set encoding=utf8
 
 " Use Unix as the standard file type
