@@ -39,10 +39,19 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'alunny/pegjs-vim'
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" On-demand lazy load
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 
 call plug#end()
+
+let g:asynctasks_term_pos = 'bottom'
+let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
+let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin settings
@@ -71,6 +80,7 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " coc-explorer mapping
+nmap <silent> <leader>ft :CocCommand explorer<CR>
 nmap <silent> <leader>ft :CocCommand explorer<CR>
 
 function! s:show_documentation()
@@ -365,3 +375,15 @@ hi Normal ctermbg=NONE guibg=NONE
 " language config
 " disable vim-go :GoDef short cut (gd) this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
+
+" terminal shell
+let g:terminal_shell = "/usr/bin/fish"
+
+" Define prefix dictionary
+let g:maplocalleader = ','
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+
+" asyncrun 
+nnoremap <leader>fr :AsyncTask file-run<CR>
+nnoremap <leader>ff :AsyncTask file-format<CR>
