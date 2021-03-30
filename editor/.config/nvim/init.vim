@@ -336,7 +336,7 @@ map <leader>q :wq<cr>
 
 inoremap <C-j> <Esc>
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " search tools
 if executable('ag')
