@@ -405,6 +405,7 @@ nnoremap <leader>bb  :Buffers<CR>
 nnoremap <leader>st :Startify<CR>
 
 " fugitive git bindings
-nnoremap <space>ga :Git add %:p<CR><CR>
-nnoremap <space>gs :Gstatus<CR>
-nnoremap <space>gc :Git commit -v -q<CR>
+nmap <leader>ga :Git add %:p<CR><CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gc :Gcommit -v<cr>
+nmap <leader>gp :AsyncRun git push<cr>
