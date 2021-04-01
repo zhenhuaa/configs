@@ -18,7 +18,8 @@
     "roleid",
     "serverid",
     "skey",
-    "targetid"
+    "targetid",
+    "tianyu"
   ],
   "languageserver": {
     "golang": {
@@ -32,6 +33,9 @@
   },
   "yaml.trace.server": "verbose",
   "explorer.keyMappings.global": {
-    "v":"open:vsplit"
-  }
+    "s":"open:vsplit"
+  },
+  "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableVimDevicons": true,
+  "explorer.icon.enableNerdfont": true
 }

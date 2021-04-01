@@ -33,22 +33,26 @@ Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go'
+Plug 'mbbill/undotree'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'alunny/pegjs-vim'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'voldikss/vim-translator'
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " On-demand lazy load
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 
+
 call plug#end()
 
+let g:asyncrun_open=6
 let g:asynctasks_term_pos = 'bottom'
 let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
 let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
@@ -79,9 +83,18 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" Use T to translate current word
+nnoremap <silent> T :Translate<CR>
+
 " coc-explorer mapping
 nmap <silent> <leader>ft :CocCommand explorer<CR>
 nmap <silent> <leader>ft :CocCommand explorer<CR>
+
+" todo
+nmap <silent> <leader>td :Rg TODO <CR>
+
+" undotree
+nmap <silent> <leader>ut :UndotreeToggle<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -330,7 +343,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 nmap <C-p> :Files<CR>
-nmap <C-b> :Buffers<CR>
 map <leader>q :wq<cr>
 
 
@@ -387,3 +399,12 @@ nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 " asyncrun 
 nnoremap <leader>fr :AsyncTask file-run<CR>
 nnoremap <leader>ff :AsyncTask file-format<CR>
+"buff list
+nnoremap <leader>bb  :Buffers<CR>  
+"Start page
+nnoremap <leader>st :Startify<CR>
+
+" fugitive git bindings
+nnoremap <space>ga :Git add %:p<CR><CR>
+nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gc :Git commit -v -q<CR>

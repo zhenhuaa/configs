@@ -73,3 +73,4 @@ setenv LANG "en_US.UTF-8"
 fnm env | source
 
 [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
+
