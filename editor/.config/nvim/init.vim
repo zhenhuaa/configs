@@ -43,6 +43,7 @@ Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'voldikss/vim-translator'
+Plug 'Yggdroot/hiPairs'
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " On-demand lazy load
@@ -88,10 +89,20 @@ nnoremap <silent> T :Translate<CR>
 
 " coc-explorer mapping
 nmap <silent> <leader>ft :CocCommand explorer<CR>
-nmap <silent> <leader>ft :CocCommand explorer<CR>
+
+
+
+command! -bang -nargs=* FindCurrentWord
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(expand('<cword>')), 0)
+
+" search current word
+nmap <silent> gw :FindCurrentWord<CR>
+
 
 " todo
-nmap <silent> <leader>td :Rg TODO <CR>
+nmap <silent> <leader>td :Rg TODO<CR>
+
 
 " undotree
 nmap <silent> <leader>ut :UndotreeToggle<CR>
