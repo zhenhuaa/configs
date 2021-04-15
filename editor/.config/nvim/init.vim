@@ -1,7 +1,5 @@
 " Fish doesn't play all that well with others
 set shell=/bin/bash
-let g:python3_host_prog='/usr/bin/python3'
-
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -17,28 +15,23 @@ filetype off
 call plug#begin()
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'APZelos/blamer.nvim'
-Plug 'posva/vim-vue'
 Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-sleuth'
 Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-sleuth'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
+Plug 'pangloss/vim-javascript', {'for': ['javascript']}
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'fatih/vim-go'
 Plug 'mbbill/undotree'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'alunny/pegjs-vim'
+Plug 'dhruvasagar/vim-table-mode' , { 'for': ['yaml', 'makedown'] }
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -48,15 +41,15 @@ Plug 'Yggdroot/hiPairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " On-demand lazy load
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
-
-
+Plug 'tpope/vim-projectionist'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
-let g:asyncrun_open=6
+
+let g:asynctasks_term_focus=0
+let g:asynctasks_term_reuse=1
 let g:asynctasks_term_pos = 'bottom'
-let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
-let g:asynctasks_term_cols = 80    " 设置横向切割时，宽度为 80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin settings
@@ -82,14 +75,33 @@ nmap <silent> gr <Plug>(coc-references)
 
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+noremap <silent> K :call <SID>show_documentation()<CR>
 
 " Use T to translate current word
-nnoremap <silent> T :Translate<CR>
+nmap <silent> T :Translate<CR>
 
 " coc-explorer mapping
 nmap <silent> <leader>ft :CocCommand explorer<CR>
+nmap <silent> <leader>tt :AsyncTask current-test<CR>
 
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
 
 command! -bang -nargs=* FindCurrentWord
@@ -97,15 +109,15 @@ command! -bang -nargs=* FindCurrentWord
   \   'rg --column --line-number --no-heading --color=always '.shellescape(expand('<cword>')), 0)
 
 " search current word
-nmap <silent> gw :FindCurrentWord<CR>
+noremap <silent> gw :FindCurrentWord<CR>
 
 
 " todo
-nmap <silent> <leader>td :Rg TODO<CR>
+noremap <silent> <leader>td :Rg TODO<CR>
 
 
 " undotree
-nmap <silent> <leader>ut :UndotreeToggle<CR>
+noremap <silent> <leader>ut :UndotreeToggle<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -118,7 +130,7 @@ endfunction
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+noremap <leader>rn <Plug>(coc-rename)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
@@ -131,6 +143,7 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 
+let g:coc_global_extensions = ['coc-tasks', 'coc-snippets']
 
 
 let g:table_mode_corner='|'
@@ -155,15 +168,15 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
  " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+noremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+noremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+noremap <silent> <space>c  :<C-u>CocList commands<cr>
 
 
 vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+noremap <leader>f  <Plug>(coc-format-selected)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,7 +194,7 @@ set autoread
 au FocusGained,BufEnter * checktime
 
 " Fast saving
-nmap <leader>w :w!<cr>
+noremap <leader>w :w!<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -353,8 +366,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
-nmap <C-p> :Files<CR>
-map <leader>q :wq<cr>
+noremap <C-p> :Files<CR>
+map <leader>q :q<cr>
 
 
 inoremap <C-j> <Esc>
@@ -371,23 +384,13 @@ if executable('rg')
 	set grepformat=%f:%l:%c:%m
 endif
 
-" hide netrw_banner
-let g:netrw_banner=0
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
-autocmd FileType netrw set nolist
-
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
 set undodir=~/.vim/undo
 
 
-" Fugitive Conflict Resolution
-nnoremap <leader>gd :Gdiffsplit!<CR>
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>
-
-nmap j gj
-nmap k gk
+noremap j gj
+noremap k gk
 
 
 colorscheme gruvbox 
@@ -404,19 +407,17 @@ let g:terminal_shell = "/usr/bin/fish"
 
 " Define prefix dictionary
 let g:maplocalleader = ','
-nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+noremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+noremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 " asyncrun 
-nnoremap <leader>fr :AsyncTask file-run<CR>
-nnoremap <leader>ff :AsyncTask file-format<CR>
+noremap <leader>fr :AsyncTask file-run<CR>
+noremap <leader>ff :AsyncTask file-format<CR>
 "buff list
-nnoremap <leader>bb  :Buffers<CR>  
+noremap <leader>bb  :Buffers<CR>  
 "Start page
-nnoremap <leader>st :Startify<CR>
+noremap <leader>st :Startify<CR>
 
-" fugitive git bindings
-nmap <leader>ga :Git add %:p<CR><CR>
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gc :Gcommit -v<cr>
-nmap <leader>gp :AsyncRun git push<cr>
+
+"Start page
+noremap <leader><leader> :A<cr>
