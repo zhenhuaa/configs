@@ -5,7 +5,6 @@ set shell=/bin/bash
 " like <leader>w saves the current file
 let mapleader = "\<Space>"
 
-
 " =============================================================================
 " # PLUGINS
 " =============================================================================
@@ -47,13 +46,10 @@ Plug 'honza/vim-snippets'
 call plug#end()
 
 
-let g:asynctasks_term_focus=0
-let g:asynctasks_term_reuse=1
-let g:asynctasks_term_pos = 'bottom'
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -73,6 +69,17 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+
 
 " Use K to show documentation in preview window.
 noremap <silent> K :call <SID>show_documentation()<CR>
@@ -82,6 +89,8 @@ nmap <silent> T :Translate<CR>
 
 " coc-explorer mapping
 nmap <silent> <leader>ft :CocCommand explorer<CR>
+
+" test current
 nmap <silent> <leader>tt :AsyncTask current-test<CR>
 
 
@@ -111,10 +120,13 @@ command! -bang -nargs=* FindCurrentWord
 " search current word
 noremap <silent> gw :FindCurrentWord<CR>
 
+" async task
+let g:asynctasks_term_focus=0
+let g:asynctasks_term_reuse=1
+let g:asynctasks_term_pos = 'bottom'
 
 " todo
 noremap <silent> <leader>td :Rg TODO<CR>
-
 
 " undotree
 noremap <silent> <leader>ut :UndotreeToggle<CR>
@@ -128,12 +140,6 @@ function! s:show_documentation()
 endfunction
 
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-
-" Symbol renaming.
-noremap <leader>rn <Plug>(coc-rename)
-
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Introduce function text object
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -168,15 +174,20 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
  " Mappings using CoCList:
 " Show all diagnostics.
-noremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+noremap <leader>l :<C-u>CocList<cr>
+
+noremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-noremap <silent> <space>e  :<C-u>CocList extensions<cr>
+noremap <silent> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands.
-noremap <silent> <space>c  :<C-u>CocList commands<cr>
+noremap <silent> <leader>c  :<C-u>CocList commands<cr>
+" Show commands.
+noremap <silent> <leader>ol :<C-u>CocList outline<cr>
 
 
 vmap <leader>f  <Plug>(coc-format-selected)
 noremap <leader>f  <Plug>(coc-format-selected)
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -220,6 +231,13 @@ if has("win16") || has("win32")
 else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
+
+
+
+if has("nvim")
+  set guicursor=
+endif
+
 
 "Always show current position
 set ruler
@@ -421,3 +439,5 @@ noremap <leader>st :Startify<CR>
 
 "Start page
 noremap <leader><leader> :A<cr>
+
+let g:hiPairs_enable_matchParen = 0
