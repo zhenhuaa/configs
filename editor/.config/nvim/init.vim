@@ -17,6 +17,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
@@ -34,7 +35,6 @@ Plug 'dhruvasagar/vim-table-mode' , { 'for': ['yaml', 'makedown'] }
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'voldikss/vim-translator'
 Plug 'Yggdroot/hiPairs'
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -84,8 +84,11 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Use K to show documentation in preview window.
 noremap <silent> K :call <SID>show_documentation()<CR>
 
-" Use T to translate current word
-nmap <silent> T :Translate<CR>
+" Use t to translate current word
+" popup
+nmap T <Plug>(coc-translator-p)
+vmap T <Plug>(coc-translator-pv)
+
 
 " coc-explorer mapping
 nmap <silent> <leader>ft :CocCommand explorer<CR>
@@ -386,6 +389,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 map <leader>pp :setlocal paste!<cr>
 noremap <C-p> :Files<CR>
 map <leader>q :q<cr>
+map <leader>qa :qa<cr>
 
 
 inoremap <C-j> <Esc>
@@ -435,9 +439,14 @@ noremap <leader>ff :AsyncTask file-format<CR>
 noremap <leader>bb  :Buffers<CR>  
 "Start page
 noremap <leader>st :Startify<CR>
+noremap <leader>tm :MarkdownPreviewToggle<CR>
 
 
 "Start page
 noremap <leader><leader> :A<cr>
 
 let g:hiPairs_enable_matchParen = 0
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
